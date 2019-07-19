@@ -14,16 +14,13 @@
 <script>
 import { get, concatClasses } from "simter-vue-utils";
 
-const DEFAULT_TAG = get("simter.button.tag", "button");
-const DEFAULT_CLASSES = get("simter.button.classes", {
-  class: "st-button",
-  hoverClass: "hover",
-  focusClass: "focus"
-});
-
 export default {
   props: {
-    tag: { type: String, required: false, default: DEFAULT_TAG },
+    tag: {
+      type: String,
+      required: false,
+      default: () => get("simter.button.tag", "button")
+    },
     text: { type: String, required: false, default: "" },
     enableIcon: { type: Boolean, required: false, default: true },
     enableText: { type: Boolean, required: false, default: true },
@@ -31,7 +28,12 @@ export default {
     classes: {
       type: Object,
       required: false,
-      default: () => DEFAULT_CLASSES
+      default: () =>
+        get("simter.button.classes", {
+          class: "st-button",
+          hoverClass: "hover",
+          focusClass: "focus"
+        })
     }
   },
   data() {
